@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BMN Pemeliharaan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f6f9;
+      margin: 0;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      padding: 15px;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>Aplikasi Pemeliharaan BMN</h2>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h3>Input Pemeliharaan</h3>
+
+    <input id="kode" placeholder="Kode Barang">
+    <input id="nama" placeholder="Nama Barang">
+    <input id="nup" placeholder="NUP">
+    
+    <select id="jenis">
+      <option>Tanah</option>
+      <option>Bangunan</option>
+      <option>Kendaraan</option>
+      <option>Peralatan</option>
+    </select>
+
+    <input id="lokasi" placeholder="Lokasi">
+    
+    <select id="kondisi">
+      <option>Baik</option>
+      <option>Rusak Ringan</option>
+      <option>Rusak Berat</option>
+    </select>
+
+    <input type="date" id="tanggal">
+
+    <select id="jenis_pemeliharaan">
+      <option>Rutin</option>
+      <option>Perbaikan</option>
+    </select>
+
+    <input id="biaya" placeholder="Biaya">
+    <textarea id="keterangan" placeholder="Keterangan"></textarea>
+    <input id="petugas" placeholder="Nama Petugas">
+
+    <button onclick="simpanData()">Simpan</button>
+  </div>
+
+</div>
+
+<script>
+const API_URL = "ISI_URL_APPS_SCRIPT_DISINI";
+
+function simpanData() {
+  const data = {
+    kode: document.getElementById("kode").value,
+    nama: document.getElementById("nama").value,
+    nup: document.getElementById("nup").value,
+    jenis: document.getElementById("jenis").value,
+    lokasi: document.getElementById("lokasi").value,
+    kondisi: document.getElementById("kondisi").value,
+    tanggal: document.getElementById("tanggal").value,
+    jenis_pemeliharaan: document.getElementById("jenis_pemeliharaan").value,
+    biaya: document.getElementById("biaya").value,
+    keterangan: document.getElementById("keterangan").value,
+    petugas: document.getElementById("petugas").value,
+    foto: "-"
+  };
+
+  fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(res => {
+    alert("Data berhasil disimpan!");
+    location.reload();
+  });
+}
+</script>
+
+</body>
+</html>
